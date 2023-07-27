@@ -47,14 +47,6 @@ func (l *LinkedList[T]) append(value T) {
 	l.length += 1
 }
 
-func (l *LinkedList[T]) head() *Node[T] {
-	return l.Head
-}
-
-func (l *LinkedList[T]) tail() *Node[T] {
-	return l.Tail
-}
-
 func (l *LinkedList[T]) getByIndex(idx int) (T, bool) {
 	var t T
 
@@ -62,7 +54,7 @@ func (l *LinkedList[T]) getByIndex(idx int) (T, bool) {
 		return t, false
 	}
 
-	curr := l.head()
+	curr := l.Head
 
 	if curr == nil {
 		return t, false
