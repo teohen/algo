@@ -27,6 +27,7 @@ type LinkedList[T comparable] struct {
 func NewLinkedList[T comparable]() *LinkedList[T] {
 	return &LinkedList[T]{
 		Head:   nil,
+		Tail:   nil,
 		length: 0}
 }
 
