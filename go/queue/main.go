@@ -61,7 +61,6 @@ func (q *Queue[T]) Dequeue() (T, bool) {
 	q.length -= 1
 	return head.Value, true
 }
-
 func (q *Queue[T]) Peek() T {
 	var value T
 	if q.length > 0 {
