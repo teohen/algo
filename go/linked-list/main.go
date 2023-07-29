@@ -141,7 +141,7 @@ func (l *LinkedList[T]) printAll() {
 	fmt.Println("HEAD", l.Head)
 	fmt.Println("TAIL", l.Tail)
 }
-func (l *LinkedList[T]) getLength() int {
+func (l *LinkedList[T]) GetLength() int {
 	return l.length
 }
 
