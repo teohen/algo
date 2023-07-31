@@ -37,14 +37,6 @@ func TestLinkedListAppend(t *testing.T) {
 			testError(t, "listLength", 1, listLength)
 		}
 
-		if list.Head == nil {
-			testError(t, "Head", "not nil", "nil")
-		}
-
-		if list.Tail == nil {
-			testError(t, "Tail", "not nil", "nil")
-		}
-
 		if list.Head.Value != valueToAppend {
 			testError(t, "Head.Value", valueToAppend, list.Head.Value)
 		}
@@ -57,27 +49,68 @@ func TestLinkedListAppend(t *testing.T) {
 	t.Run("append to a list with some values already in it", func(t *testing.T) {
 		list := NewLinkedList[string]()
 
-		valueToAppend := "value to append"
+		firstValueToAppend := "value to append"
+		secondValueToAppend := "second value to append"
 
-		list.append(valueToAppend)
-		list.append(valueToAppend)
+		list.append(firstValueToAppend)
+		list.append(secondValueToAppend)
 
 		if list.length != 2 {
 			testError(t, "length", 2, list.length)
 		}
 
-		if list.Head.Value == valueToAppend {
-			testError(t, "List.Head.Value", fmt.Sprintf("!= %s", valueToAppend), valueToAppend)
+		if list.Head.Value != firstValueToAppend {
+			testError(t, "List.Head.Value", fmt.Sprintf("!= %s", firstValueToAppend), list.Head.Value)
 		}
 
-		if list.Tail.Value != valueToAppend {
-			testError(t, "List.Tail.Value", valueToAppend, list.Tail.Value)
+		if list.Tail.Value != secondValueToAppend {
+			testError(t, "List.Tail.Value", secondValueToAppend, list.Tail.Value)
 		}
 
 		currentNode := list.Head.Next.Value
 
-		if currentNode != valueToAppend {
-			testError(t, "node.value", valueToAppend, currentNode)
+		if currentNode != secondValueToAppend {
+			testError(t, "node.value", secondValueToAppend, currentNode)
+		}
+	})
+
+	t.Run("prepend to a empty list", func(t *testing.T) {
+
+		list := NewLinkedList[string]()
+
+		valueToPrepend := "value to prepend"
+
+		list.prepend(valueToPrepend)
+
+		if list.length != 1 {
+			testError(t, "list.length", 1, list.length)
+		}
+
+		if list.Head.Value != valueToPrepend {
+			testError(t, "list.head.value", valueToPrepend, list.Head.Value)
+		}
+
+		if list.Tail.Value != valueToPrepend {
+			testError(t, "list.tail.value", valueToPrepend, list.Tail.Value)
+		}
+	})
+
+	t.Run("prepend with a list with a least 1 item", func(t *testing.T) {
+		list := NewLinkedList[string]()
+		firstValueToPrepend := "first value"
+		secondValueToPrepend := "second value"
+
+		list.prepend(firstValueToPrepend)
+		list.prepend(secondValueToPrepend)
+
+		if list.length != 2 {
+			testError(t, "list.length", 2, list.length)
+		}
+		if list.Head.Value != secondValueToPrepend {
+			testError(t, "list.head.value", secondValueToPrepend, list.Head.Value)
+		}
+		if list.Tail.Value != firstValueToPrepend {
+			testError(t, "list.tail.value", firstValueToPrepend, list.Tail.Value)
 		}
 	})
 
